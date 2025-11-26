@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFlow - Educação Personalizada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #00a8cc 0%, #0090b8 50%, #00d4ff 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-30px) scale(1.1);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .logo-image {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 100px rgba(255, 255, 255, 0.3);
+            filter: none;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 100px rgba(255, 255, 255, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 120px rgba(255, 255, 255, 0.5);
+                transform: scale(1.02);
+            }
+        }
+
+        .logo {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.3s both;
+            padding: 0 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 4vw, 3rem);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .features {
+            padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 3vw, 2rem);
+            background: #0a0a0a;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #0a2a3a 0%, #0d3d52 100%);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 168, 204, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 168, 204, 0.4);
+            border-color: rgba(0, 168, 204, 0.6);
+        }
+
+        .feature-icon {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 1rem;
+            color: #00a8cc;
+            font-weight: 700;
+        }
+
+        .feature-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .stats {
+            padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 3vw, 2rem);
+            background: linear-gradient(135deg, #00a8cc 0%, #0090b8 100%);
+            text-align: center;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: clamp(2rem, 4vw, 3rem);
+        }
+
+        .stat-item {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .stat-number {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            opacity: 0.9;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .why-different {
+            padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 3vw, 2rem);
+            background: linear-gradient(135deg, #0a2a3a 0%, #0f0f0f 100%);
+        }
+
+        .why-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.8;
+            color: #b0b0b0;
+            padding: 0 1rem;
+        }
+
+        .differentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+            margin-top: 3rem;
+        }
+
+        .differential-item {
+            background: rgba(0, 168, 204, 0.1);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            border-radius: 20px;
+            border-left: 4px solid #00a8cc;
+            transition: all 0.3s ease;
+        }
+
+        .differential-item:hover {
+            transform: translateX(10px);
+            background: rgba(0, 168, 204, 0.15);
+            border-left-width: 6px;
+        }
+
+        .differential-item h3 {
+            color: #00a8cc;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: 1rem;
+        }
+
+        .differential-item p {
+            color: #c0c0c0;
+            line-height: 1.7;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .social-impact {
+            padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 3vw, 2rem);
+            background: linear-gradient(135deg, #00a8cc 0%, #0090b8 100%);
+        }
+
+        .impact-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .impact-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+            border-radius: 50px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .impact-title {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            padding: 0 1rem;
+        }
+
+        .impact-description {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            padding: 0 1rem;
+        }
+
+        .impact-highlight {
+            background: rgba(0, 0, 0, 0.2);
+            padding: clamp(1.5rem, 3vw, 2rem);
+            border-radius: 15px;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            line-height: 1.7;
+            margin: 0 1rem;
+        }
+
+        .inclusivity {
+            padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 3vw, 2rem);
+            background: #0a0a0a;
+        }
+
+        .inclusivity-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .inclusivity-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 0 1rem;
+        }
+
+        .inclusivity-intro h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #00a8cc, #0090b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .inclusivity-intro p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+            margin-top: 3rem;
+        }
+
+        .audience-card {
+            background: linear-gradient(135deg, #0a2a3a 0%, #0d3d52 100%);
+            padding: clamp(1.5rem, 3vw, 2rem);
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 168, 204, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .audience-card:hover {
+            transform: scale(1.05);
+            border-color: rgba(0, 168, 204, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 168, 204, 0.3);
+        }
+
+        .audience-icon {
+            font-size: clamp(2.5rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .audience-card h3 {
+            color: #00a8cc;
+            margin-bottom: 0.5rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+
+        .audience-card p {
+            color: #b0b0b0;
+            font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+            line-height: 1.6;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .steps {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.3s; }
+        .step:nth-child(3) { animation-delay: 0.5s; }
+        .step:nth-child(4) { animation-delay: 0.7s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .step-number {
+            min-width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        .step-content h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            padding: 2rem;
+            text-align: center;
+            background: #000;
+            color: #666;
+        }
+
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: #0f0f0f;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .logo-placeholder {
+                width: 60px;
+                height: 60px;
+                font-size: 0.75rem;
+            }
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .impact-title {
+                font-size: 2rem;
+            }
+
+            .impact-description {
+                font-size: 1.1rem;
+            }
+
+            .inclusivity-intro h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="animated-bg">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <div class="hero-content">
+            <div class="logo-container">
+                <img src="logoLumen.png" alt="LumenLink Logo" class="logo-image">
+                <h1 class="logo">LumenLink</h1>
+            </div>
+            <p class="tagline">Educação personalizada que se adapta a você</p>
+            <a href="#features" class="cta-button">Descubra como funciona</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🎥</span>
+                <h3 class="feature-title">Videoaulas Interativas</h3>
+                <p class="feature-description">Aprenda no seu ritmo com conteúdo em vídeo de alta qualidade, disponível 24/7</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🎧</span>
+                <h3 class="feature-title">Podcasts Educacionais</h3>
+                <p class="feature-description">Transforme seu tempo livre em aprendizado com áudios exclusivos e inspiradores</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🤖</span>
+                <h3 class="feature-title">IA Personalizada</h3>
+                <p class="feature-description">Assistente inteligente que adapta o conteúdo ao seu estilo e velocidade de aprendizado</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🧠</span>
+                <h3 class="feature-title">Mapas Mentais</h3>
+                <p class="feature-description">Visualize conexões e organize conhecimento de forma intuitiva e memorável</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <h3 class="feature-title">Progresso Personalizado</h3>
+                <p class="feature-description">Acompanhe sua evolução com métricas detalhadas e recomendações customizadas</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <h3 class="feature-title">Metas Inteligentes</h3>
+                <p class="feature-description">Defina objetivos e receba um plano de estudos criado especialmente para você</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">10k+</span>
+                <span class="stat-label">Estudantes Ativos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Cursos Disponíveis</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Taxa de Satisfação</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Suporte IA</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-different">
+        <div class="why-content">
+            <h2 class="section-title">Por Que a LumenLink é Diferente?</h2>
+            <p class="why-intro">
+                Enquanto outras plataformas oferecem apenas conteúdo genérico e IA básica, a LumenLink foi construída do zero para revolucionar a forma como você aprende. Nossa tecnologia vai muito além de respostas automáticas.
+            </p>
+            <div class="differentials-grid">
+                <div class="differential-item">
+                    <h3>🎯 IA Verdadeiramente Adaptativa</h3>
+                    <p>Nossa inteligência artificial não apenas responde perguntas. Ela analisa seu desempenho em tempo real, identifica suas dificuldades e ajusta automaticamente o método de ensino, velocidade e formato do conteúdo.</p>
+                </div>
+
+                <div class="differential-item">
+                    <h3>🧩 Múltiplos Formatos Integrados</h3>
+                    <p>Diferente de plataformas que oferecem apenas vídeos ou textos, combinamos videoaulas, podcasts, mapas mentais e exercícios interativos em uma experiência fluida e complementar.</p>
+                </div>
+
+                <div class="differential-item">
+                    <h3>🧠 Neurociência Aplicada</h3>
+                    <p>Nossos algoritmos são baseados em pesquisas de neurociência sobre aprendizagem. Utilizamos técnicas de repetição espaçada, microlearning e gamificação comprovadas cientificamente.</p>
+                </div>
+
+                <div class="differential-item">
+                    <h3>🤝 Assistente Proativo</h3>
+                    <p>Nossa IA não espera você pedir ajuda. Ela identifica quando você está com dificuldades e oferece suporte antes mesmo que você perceba que precisa.</p>
+                </div>
+
+                <div class="differential-item">
+                    <h3>📈 Análise Preditiva</h3>
+                    <p>Prevemos áreas onde você pode ter dificuldades futuras e oferecemos reforço preventivo, evitando lacunas no aprendizado.</p>
+                </div>
+
+                <div class="differential-item">
+                    <h3>🌐 Ecossistema Completo</h3>
+                    <p>Não somos apenas uma ferramenta isolada. Oferecemos um ambiente completo de aprendizagem com comunidade, mentoria e ferramentas colaborativas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-impact">
+        <div class="impact-content">
+            <div class="impact-badge">🏛️ Parceria Governamental</div>
+            <h2 class="impact-title">Educação Gratuita para Todos</h2>
+            <p class="impact-description">
+                Acreditamos que educação de qualidade é um direito, não um privilégio. Por isso, firmamos parceria com o governo brasileiro para oferecer nossa plataforma completamente gratuita a todos os estudantes de escolas públicas.
+            </p>
+            <div class="impact-highlight">
+                <p><strong>Nosso compromisso:</strong> Democratizar o acesso à tecnologia educacional de ponta e reduzir a desigualdade no ensino. Cada estudante da rede pública tem acesso às mesmas ferramentas de IA, videoaulas e recursos personalizados que oferecemos na versão premium.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="inclusivity">
+        <div class="inclusivity-content">
+            <div class="inclusivity-intro">
+                <h2>Educação Para Todos, sem exceção.</h2>
+                <p>A LumenLink foi desenvolvida para atender as necessidades únicas de cada estudante. Nossa plataforma é inclusiva por design, com recursos especializados para diferentes perfis de aprendizagem.</p>
+            </div>
+
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <div class="audience-icon">🧩</div>
+                    <h3>Autismo (TEA)</h3>
+                    <p>Interface personalizável, rotinas estruturadas, comunicação visual clara e conteúdo adaptado ao processamento sensorial</p>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">⚡</div>
+                    <h3>TDAH</h3>
+                    <p>Sessões curtas e dinâmicas, gamificação intensiva, lembretes inteligentes e formato multimídia para manter o engajamento</p>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">📖</div>
+                    <h3>Dislexia</h3>
+                    <p>Fontes especiais, áudio-descrição, velocidade ajustável e conversão texto-para-voz de alta qualidade</p>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">👁️</div>
+                    <h3>Deficiência Visual</h3>
+                    <p>Compatibilidade total com leitores de tela, navegação por voz e descrição detalhada de elementos visuais</p>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">👂</div>
+                    <h3>Deficiência Auditiva</h3>
+                    <p>Legendas automáticas precisas, transcrições completas e comunicação visual prioritária</p>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">🎓</div>
+                    <h3>Superdotação</h3>
+                    <p>Conteúdo avançado sob demanda, desafios personalizados e progressão acelerada quando apropriado</p>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">🌍</div>
+                    <h3>Diferentes Idades</h3>
+                    <p>Adaptação de linguagem e complexidade para crianças, adolescentes, adultos e terceira idade</p>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">🗣️</div>
+                    <h3>Multilíngue</h3>
+                    <p>Suporte a múltiplos idiomas e recursos para estudantes aprendendo português como segunda língua</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">Como Funciona</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Cadastro Rápido</h3>
+                    <p>Crie sua conta em menos de 2 minutos e comece sua jornada de aprendizado</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Avaliação Inicial</h3>
+                    <p>Nossa IA analisa seu perfil e identifica a melhor estratégia de ensino para você</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Plano Personalizado</h3>
+                    <p>Receba um roteiro de estudos único, adaptado aos seus objetivos e disponibilidade</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Aprenda e Evolua</h3>
+                    <p>Acesse videoaulas, podcasts, mapas mentais e conte com suporte IA em tempo real</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 LumenLink - Todos os direitos reservados | Transformando educação através da tecnologia e inclusão</p>
+    </footer>
+
+    <script>
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
